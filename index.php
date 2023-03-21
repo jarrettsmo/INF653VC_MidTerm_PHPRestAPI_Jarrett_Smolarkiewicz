@@ -1,23 +1,5 @@
 <?php
-/**
- * Traversy Media PHP OOP REST API Tutorial
- * #1
- * PHP REST API From Scratch [1] - Database & Read
- * https://www.youtube.com/watch?v=OEWXbpUMODk 
- * 
- * #2
- * PHP REST API From Scratch [2] - Single & Create
- * https://www.youtube.com/watch?v=-nq4UbD0NT8
- * 
- * #3
- * PHP REST API From Scratch [3] - Update & Delete
- * https://www.youtube.com/watch?v=tG2U18EmIu4
- * 
- */
-//$_ENV['user'] = "Bob";
-//$_ENV['password'] = "Bob12345";
-
-$path = $_SERVER['PATH_INFO'];
+$path = $_SERVER['REQUEST_URI'];
 $id = $_REQUEST['id'];
 $author_id = $_REQUEST['author_id'];
 $category_id = $_REQUEST['category_id'];
@@ -36,11 +18,11 @@ echo    "current type in URL: " . $type_in . "<br>" .
 
 echo "<hr>";
 
-if (substr($path, 1, (strlen($path) - 2)) == 'quotes') {
+if (str_starts_with($path, '/api/quotes')) {
     echo qFunc($type_in, $num_in);
-} elseif (substr($path, 1, (strlen($path) - 2)) == 'authors') {
+} elseif (str_starts_with($path, '/api/authors')) {
     echo aFunc('a', 'b');
-} elseif (substr($path, 1, (strlen($path) - 2)) == 'categories') {
+} elseif (str_starts_with($path, '/api/categories')) {
     echo cFunc('c', 'd');
 }
 
