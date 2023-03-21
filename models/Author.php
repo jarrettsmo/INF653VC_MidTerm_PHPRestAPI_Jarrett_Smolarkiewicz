@@ -2,29 +2,28 @@
     class Author {
         // Database
         private $conn;
-        private $table = 'categories';
+        private $table = 'authors';
 
         // Properties
         public $id;
-        public $name;
-        public $created_at;
+        public $author;
 
         // Constructor with Database
         public function __construct($db) {
             $this->conn = $db;
         }
 
-        // Get Categories
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ???????????????????????????????????????????????????????????????
+        // Get Authors
         public function read() {
             // Create query
             $query =    'SELECT 
                             id,
-                            name,
-                            created_at
+                            author
                         FROM
                             ' . $this->table . '
                         ORDER BY
-                            created_at DESC';
+                            author DESC';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);

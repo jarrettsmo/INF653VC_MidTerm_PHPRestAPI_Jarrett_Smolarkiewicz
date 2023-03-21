@@ -1,40 +1,40 @@
 <?php
-    class Post {
+    class Quote {
         // Database Actions
         private $conn;
-        private $table = 'posts';
+        private $table = 'quotes';
 
-        // Post Properties
+
+        // DID I SETUP THESE PROPERTIES CORRECTLY ????????????????????????????????????????????????????????????????????????????????    
+        // Quote Properties
         public $id;
+        public $quote;
+        public $author_id;
         public $category_id;
-        public $category_name;
-        public $title;
-        public $body;
-        public $author;
-        public $created_at;
 
         // Constructor with Database
         public function __construct($db) {
             $this->conn = $db;
         }
 
-        // Get Posts
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ???????????????????????????????????????????????????????????????????????????????? 
+        // Get Quote
         public function read() {
             // Create query
             $query =    'SELECT 
-                            c.name as category_name,
-                            p.id,
-                            p.category_id,
-                            p.title,
-                            p.body,
-                            p.author,
-                            p.created_at
+                            a.author as quote_author,
+                            c.category as category_name,
+                            q.id,
+                            q.quote,
+                            q.author_id,
+                            q.category_id
                         FROM
-                            ' . $this->table . ' p
-                        LEFT JOIN
-                            categories c ON p.category_id = c.id
-                        ORDER BY
-                            p.created_at DESC';
+                            /* Is this correct or just the "quotes" table. */
+                            ' . $this->table . ' q
+                        INNER JOIN
+                            authors a ON q.author_id = a.id
+                        INNER JOIN
+                            categories c ON q.category_id = c.id';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
@@ -45,23 +45,26 @@
             return $stmt;
         }
 
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ????????????????????????????????????????????????????????????????????????????????
         // Get single Post
         public function read_single() {
             // Create query
             $query =    'SELECT 
-                            c.name as category_name,
-                            p.id,
-                            p.category_id,
-                            p.title,
-                            p.body,
-                            p.author,
-                            p.created_at
+                            a.author as quote_author,
+                            c.category as category_name,
+                            q.id,
+                            q.quote,
+                            q.author_id,
+                            q.category_id
                         FROM
-                            ' . $this->table . ' p
-                        LEFT JOIN
-                            categories c ON p.category_id = c.id
+                            /* Is this correct or just the "quotes" table. */
+                            ' . $this->table . ' q
+                        INNER JOIN
+                            authors a ON q.author_id = a.id
+                        INNER JOIN
+                            categories c ON q.category_id = c.id
                         WHERE
-                            p.id = ?
+                            q.id = ?
                         LIMIT 0,1';
 
             // PDO Prepared Statement
@@ -75,37 +78,36 @@
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            // DID I SETUP THESE PROPERTIES CORRECTLY ????????????????????????????????????????????????????????????????????????????????
             // Set properties
-            $this->title = $row['title'];
-            $this->body = $row['body'];
-            $this->author = $row['author'];
+            $this->quote = $row['quote'];
+            $this->author_id = $row['author_id'];
             $this->category_id = $row['category_id'];
-            $this->category_name = $row['category_name'];
         }
 
-        // Create Post
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ????????????????????????????????????????????????????????????????????????????????
+        // Create Quote
         public function create() {
             // Create query
             $query =    'INSERT INTO ' . $this->table . '
                         SET
-                            title = :title,
-                            body = :body,
-                            author = :author,
+                            quote = :quote,
+                            author_id = :author_id,
                             category_id = :category_id';
         
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
 
+            // DID I SETUP THESE DATA CLEANING VARIABLES CORRECTLY ???????????????????????????????????????????????????????????????
             // Clean data
-            $this->title = htmlspecialchars(strip_tags($this->title));
-            $this->body = htmlspecialchars(strip_tags($this->body));
-            $this->author = htmlspecialchars(strip_tags($this->author));
+            $this->quote = htmlspecialchars(strip_tags($this->quote));
+            $this->author_id = htmlspecialchars(strip_tags($this->author_id));
             $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
+            // DID I SETUP THESE DATA BINDING PARAMETERS CORRECTLY ???????????????????????????????????????????????????????????????
             // Bind data
-            $stmt->bindParam(':title', $this->title);
-            $stmt->bindParam(':body', $this->body);
-            $stmt->bindParam(':author', $this->author);
+            $stmt->bindParam(':quote', $this->quote);
+            $stmt->bindParam(':author_id', $this->author_id);
             $stmt->bindParam(':category_id', $this->category_id);
 
             // Execute query
@@ -119,14 +121,14 @@
             return false;
         }
 
-         // Update Post
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ????????????????????????????????????????????????????????????????????????????????
+         // Update Quote
          public function update() {
             // Create query
             $query =    'UPDATE ' . $this->table . '
                         SET
-                            title = :title,
-                            body = :body,
-                            author = :author,
+                            quote = :quote,
+                            author_id = :author_id,
                             category_id = :category_id
                         WHERE
                             id = :id';
@@ -134,17 +136,17 @@
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
 
+            // DID I SETUP THESE DATA CLEANING VARIABLES CORRECTLY ???????????????????????????????????????????????????????????????
             // Clean data
-            $this->title = htmlspecialchars(strip_tags($this->title));
-            $this->body = htmlspecialchars(strip_tags($this->body));
-            $this->author = htmlspecialchars(strip_tags($this->author));
+            $this->quote = htmlspecialchars(strip_tags($this->quote));
+            $this->author_id = htmlspecialchars(strip_tags($this->author_id));
             $this->category_id = htmlspecialchars(strip_tags($this->category_id));
             $this->id = htmlspecialchars(strip_tags($this->id));
 
+            // DID I SETUP THESE DATA BINDING PARAMETERS CORRECTLY ???????????????????????????????????????????????????????????????
             // Bind data
-            $stmt->bindParam(':title', $this->title);
-            $stmt->bindParam(':body', $this->body);
-            $stmt->bindParam(':author', $this->author);
+            $stmt->bindParam(':quote', $this->quote);
+            $stmt->bindParam(':author_id', $this->author_id);
             $stmt->bindParam(':category_id', $this->category_id);
             $stmt->bindParam(':id', $this->id);
 
@@ -159,6 +161,7 @@
             return false;
         }
 
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ????????????????????????????????????????????????????????????????????????????????
         // Delete Post
         public function delete() {
             // Create query

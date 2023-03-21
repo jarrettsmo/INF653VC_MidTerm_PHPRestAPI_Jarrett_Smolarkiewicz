@@ -6,25 +6,24 @@
 
         // Properties
         public $id;
-        public $name;
-        public $created_at;
+        public $category;
 
         // Constructor with Database
         public function __construct($db) {
             $this->conn = $db;
         }
 
+        // DID I SETUP THIS QUERY METHOD CORRECTLY ???????????????????????????????????????????????????????????????
         // Get Categories
         public function read() {
             // Create query
             $query =    'SELECT 
                             id,
-                            name,
-                            created_at
+                            category
                         FROM
                             ' . $this->table . '
                         ORDER BY
-                            created_at DESC';
+                            category DESC';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
