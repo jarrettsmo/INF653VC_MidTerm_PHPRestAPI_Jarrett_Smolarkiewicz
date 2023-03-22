@@ -62,17 +62,26 @@
                         INNER JOIN
                             categories c ON q.category_id = c.id
                         WHERE
-                            q.id = ?
+                            q.id = :id
                         LIMIT 0,1';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
 
             // Bind ID
-            $stmt->bindParam(1, $this->id);
+            //$stmt->bindParam(1, $this->id);
+            $stmt->bindParam(':id', $this->id);
 
             // Execute query
-            $stmt->execute();
+            //$stmt->execute();
+            if($stmt->execute()) {
+                return true;
+            } 
+
+            // Print error if problems
+            printf('Error: %s.\n', $stmt->error);
+            
+            return false;
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
