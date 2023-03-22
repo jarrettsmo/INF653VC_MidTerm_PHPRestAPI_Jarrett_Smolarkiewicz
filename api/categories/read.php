@@ -27,7 +27,8 @@
             // );
 
             // Push to "data"
-            array_push($categories_arr['data'], $category_item);
+            //array_push($categories_arr['data'], $category_item);
+            array_push($category_item);
         }
 
         // Convert from PHP array to JSON

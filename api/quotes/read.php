@@ -31,7 +31,8 @@
             // );
 
             // Push to "data"
-            array_push($quotes_arr['data'], $quote_item);
+            //array_push($quotes_arr['data'], $quote_item);
+            array_push($quote_item);
         }
 
         // Convert from PHP array to JSON

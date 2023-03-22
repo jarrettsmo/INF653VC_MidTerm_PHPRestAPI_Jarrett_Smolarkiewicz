@@ -27,7 +27,8 @@
             // );
 
             // Push to "data"
-            array_push($authors_arr['data'], $author_item);
+            //array_push($authors_arr['data'], $author_item);
+            array_push($author_item);
         }
 
         // Convert from PHP array to JSON
