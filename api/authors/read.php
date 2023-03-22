@@ -14,11 +14,17 @@
         $authors_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
 
-            $author_item = array(
-                'id' => $row['id'],
-                'author' => $row['author']
+            $category_item = array(
+                'id' => $id,
+                'author' => $author
             );
+
+            // $author_item = array(
+            //     'id' => $row['id'],
+            //     'author' => $row['author']
+            // );
 
             // Push to "data"
             array_push($authors_arr['data'], $author_item);
