@@ -16,7 +16,7 @@
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
 
-            $category_item = array(
+            $quote_item = array(
                 'id' => $id,
                 'quote' => html_entity_decode($quote),
                 'author' => $author,
