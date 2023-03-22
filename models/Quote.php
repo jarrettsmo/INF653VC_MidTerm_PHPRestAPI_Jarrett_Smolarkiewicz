@@ -31,9 +31,9 @@
                         FROM
                             ' . $this->table . ' q
                         INNER JOIN
-                            authors a ON q.author_id = a.author
+                            authors a ON q.author_id = a.id
                         INNER JOIN
-                            categories c ON q.category_id = c.category';
+                            categories c ON q.category_id = c.id';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
@@ -48,23 +48,6 @@
         // Get single Post
         public function read_single() {
             // Create query
-            // $query =    'SELECT 
-            //                 a.author as quote_author,
-            //                 c.category as category_name,
-            //                 q.id,
-            //                 q.quote,
-            //                 q.author_id,
-            //                 q.category_id
-            //             FROM
-            //                 ' . $this->table . ' q
-            //             INNER JOIN
-            //                 authors a ON q.author_id = a.id
-            //             INNER JOIN
-            //                 categories c ON q.category_id = c.id
-            //             WHERE
-            //                 q.id = ?
-            //             LIMIT 0,1';
-
             $query =    'SELECT 
                             a.author as quote_author,
                             c.category as category_name,
@@ -75,9 +58,9 @@
                         FROM
                             ' . $this->table . ' q
                         INNER JOIN
-                            authors a ON q.author_id = a.author
+                            authors a ON q.author_id = a.id
                         INNER JOIN
-                            categories c ON q.category_id = c.category
+                            categories c ON q.category_id = c.id
                         WHERE
                             q.id = ?
                         LIMIT 0,1';
@@ -89,7 +72,7 @@
             $stmt->bindParam(1, $this->id);
 
             // Execute query
-            $stmt->execute($query);
+            $stmt->execute();
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
