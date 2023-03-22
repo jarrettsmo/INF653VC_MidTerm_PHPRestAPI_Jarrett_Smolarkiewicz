@@ -14,6 +14,12 @@
     $database = new Database();
     $db = $database->connect();
 
+    function writeMessage ($msg) {
+        echo json_encode(
+            array('message' => $msg)
+        );
+    }
+
     // $path = $_SERVER['REQUEST_URI'];
     // $id = $_REQUEST['id'];
     // $author_id = $_REQUEST['author_id'];
@@ -86,9 +92,3 @@
     // function cFunc($type, $num) {
     //     return $type . "<br>" . $num;
     // }
-
-    function writeMessage ($msg) {
-        echo json_encode(
-            array('message' => $msg)
-        );
-    }

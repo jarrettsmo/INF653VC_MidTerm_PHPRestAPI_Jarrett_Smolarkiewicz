@@ -1,15 +1,4 @@
 <?php
-    // Headers
-    header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json');
-
-    include_once '../../config/Database.php';
-    include_once '../../models/Category.php';
-
-    // Instantiate Database and Connect
-    $database = new Database();
-    $db = $database->connect();
-
     // Instantiate category object
     $category = new Category($db);
 
@@ -25,11 +14,10 @@
         $categories_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
 
             $category_item = array(
-                'id' => $id,
-                'category' => $category
+                'id' => $row['id'],
+                'category' => $row['category']
             );
 
             // Push to "data"
@@ -41,7 +29,5 @@
 
     } else {
         // No categories
-        echo json_encode(
-            array('message' => 'No Categories Found')
-        );
+        writeMessage('No Categories Found');
     }
