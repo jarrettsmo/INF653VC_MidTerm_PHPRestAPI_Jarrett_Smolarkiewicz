@@ -23,7 +23,7 @@
             // Create query
             $query =    'SELECT 
                             a.author as author,
-                            c.category as category_name,
+                            c.category as category,
                             q.id,
                             q.quote,
                             q.author_id,
@@ -31,9 +31,9 @@
                         FROM
                             ' . $this->table . ' q
                         INNER JOIN
-                            authors a ON q.author_id = a.id
+                            author a ON q.author_id = a.id
                         INNER JOIN
-                            categories c ON q.category_id = c.id';
+                            category c ON q.category_id = c.id';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
@@ -50,7 +50,7 @@
             // Create query
             $query =    'SELECT 
                             a.author as author,
-                            c.category as category_name,
+                            c.category as category,
                             q.id,
                             q.quote,
                             q.author_id,
@@ -58,9 +58,9 @@
                         FROM
                             ' . $this->table . ' q
                         INNER JOIN
-                            authors a ON q.author_id = a.id
+                            author a ON q.author_id = a.id
                         INNER JOIN
-                            categories c ON q.category_id = c.id
+                            category c ON q.category_id = c.id
                         WHERE
                             q.id = ?
                         LIMIT 1';
