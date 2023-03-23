@@ -31,9 +31,9 @@
                         FROM
                             ' . $this->table . ' q
                         INNER JOIN
-                            author a ON q.author_id = a.id
+                            authors a ON q.author_id = a.id
                         INNER JOIN
-                            category c ON q.category_id = c.id';
+                            categories c ON q.category_id = c.id';
 
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
@@ -58,9 +58,9 @@
                         FROM
                             ' . $this->table . ' q
                         INNER JOIN
-                            author a ON q.author_id = a.id
+                            authors a ON q.author_id = a.id
                         INNER JOIN
-                            category c ON q.category_id = c.id
+                            categories c ON q.category_id = c.id
                         WHERE
                             q.id = ?
                         LIMIT 1';
@@ -91,9 +91,9 @@
             // Create query
             $query =    'INSERT INTO ' . $this->table . '
                         SET
-                            quote = :quote,
-                            author = :author_id,
-                            category = :category_id';
+                            quotes = :quote,
+                            authors = :author_id,
+                            categories = :category_id';
         
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
@@ -107,8 +107,8 @@
             // DID I SETUP THESE DATA BINDING PARAMETERS CORRECTLY ???????????????????????????????????????????????????????????????
             // Bind data
             $stmt->bindParam(':quote', $this->quote);
-            $stmt->bindParam(':author', $this->author_id);
-            $stmt->bindParam(':category', $this->category_id);
+            $stmt->bindParam(':author_id', $this->author_id);
+            $stmt->bindParam(':category_id', $this->category_id);
 
             // Execute query
             if($stmt->execute()) {
@@ -127,9 +127,9 @@
             // Create query
             $query =    'UPDATE ' . $this->table . '
                         SET
-                            quote = :quote,
-                            author = :author_id,
-                            category = :category_id
+                            quotes = :quote,
+                            authors = :author_id,
+                            categories = :category_id
                         WHERE
                             id = :id';
         
@@ -146,8 +146,8 @@
             // DID I SETUP THESE DATA BINDING PARAMETERS CORRECTLY ???????????????????????????????????????????????????????????????
             // Bind data
             $stmt->bindParam(':quote', $this->quote);
-            $stmt->bindParam(':author', $this->author_id);
-            $stmt->bindParam(':category', $this->category_id);
+            $stmt->bindParam(':author_id', $this->author_id);
+            $stmt->bindParam(':category_id', $this->category_id);
             $stmt->bindParam(':id', $this->id);
 
             // Execute query
