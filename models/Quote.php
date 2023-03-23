@@ -22,8 +22,8 @@
         public function read() {
             // Create query
             $query =    'SELECT 
-                            a.author as quote_author,
-                            c.category as category_name,
+                            a.author as author_id,
+                            c.category as category_id,
                             q.id,
                             q.quote,
                             q.author_id,
@@ -49,8 +49,8 @@
         public function read_single() {
             // Create query
             $query =    'SELECT 
-                            a.author as quote_author,
-                            c.category as category_name,
+                            a.author as author_id,
+                            c.category as category_id,
                             q.id,
                             q.quote,
                             q.author_id,
