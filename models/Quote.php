@@ -9,7 +9,7 @@
         // Quote Properties
         public $id;
         public $quote;
-        public $author;
+        public $author_id;
         public $category_id;
 
         // Constructor with Database
@@ -81,7 +81,7 @@
             // Set properties
             $this->id = $row['id'];
             $this->quote = $row['quote'];
-            $this->author_id = $row['author_id'];
+            $this->author_id = $row['author'];
             $this->category_id = $row['category_id'];
         }
 
