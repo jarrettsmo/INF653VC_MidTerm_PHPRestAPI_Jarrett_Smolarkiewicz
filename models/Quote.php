@@ -92,8 +92,8 @@
             $query =    'INSERT INTO ' . $this->table . '
                         SET
                             quote = :quote,
-                            author_id = :author_id,
-                            category_id = :category_id';
+                            author = :author_id,
+                            category = :category_id';
         
             // PDO Prepared Statement
             $stmt = $this->conn->prepare($query);
@@ -107,8 +107,8 @@
             // DID I SETUP THESE DATA BINDING PARAMETERS CORRECTLY ???????????????????????????????????????????????????????????????
             // Bind data
             $stmt->bindParam(':quote', $this->quote);
-            $stmt->bindParam(':author_id', $this->author_id);
-            $stmt->bindParam(':category_id', $this->category_id);
+            $stmt->bindParam(':author', $this->author_id);
+            $stmt->bindParam(':category', $this->category_id);
 
             // Execute query
             if($stmt->execute()) {
@@ -128,8 +128,8 @@
             $query =    'UPDATE ' . $this->table . '
                         SET
                             quote = :quote,
-                            author_id = :author_id,
-                            category_id = :category_id
+                            author = :author_id,
+                            category = :category_id
                         WHERE
                             id = :id';
         
@@ -146,8 +146,8 @@
             // DID I SETUP THESE DATA BINDING PARAMETERS CORRECTLY ???????????????????????????????????????????????????????????????
             // Bind data
             $stmt->bindParam(':quote', $this->quote);
-            $stmt->bindParam(':author_id', $this->author_id);
-            $stmt->bindParam(':category_id', $this->category_id);
+            $stmt->bindParam(':author', $this->author_id);
+            $stmt->bindParam(':category', $this->category_id);
             $stmt->bindParam(':id', $this->id);
 
             // Execute query
