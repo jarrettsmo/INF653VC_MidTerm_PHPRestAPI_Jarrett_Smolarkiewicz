@@ -9,7 +9,7 @@
         // Quote Properties
         public $id;
         public $quote;
-        public $author_id;
+        public $author;
         public $category_id;
 
         // Constructor with Database
@@ -22,7 +22,7 @@
         public function read() {
             // Create query
             $query =    'SELECT 
-                            a.author as quote_author,
+                            a.author as author,
                             c.category as category_name,
                             q.id,
                             q.quote,
@@ -49,7 +49,7 @@
         public function read_single() {
             // Create query
             $query =    'SELECT 
-                            a.author as quote_author,
+                            a.author as author,
                             c.category as category_name,
                             q.id,
                             q.quote,
@@ -81,7 +81,7 @@
             // Set properties
             $this->id = $row['id'];
             $this->quote = $row['quote'];
-            $this->author = $row['author_id'];
+            $this->author = $row['author'];
             $this->category_id = $row['category_id'];
         }
 
